@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/smart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="fingerprint-container hidden">
+        <div class="log-in-container">
+            <i class="fa-solid fa-xmark" id="cancel-icon"></i>
+            <h3><span id="slogan-l">Smart <span id="lock">Lock</span></span></h3>
+            <div class="info-container">
+                <form id ="detail" method="post" action="">
+                    <label class="label-name">ID:</label>
+                    <input name="User[id]" type="number" required/><br>
+                    <label class="label-name">Name:</label>
+                    <input  name="User[name]" type="text" required/><br>
+                    <fieldset>
+                        <legend class="label-name"><b>Gender</b></legend>
+                        Male<input name="User[gender]" type="radio"  value="Male" required/>
+                        Female<input  name="User[gender]" type="radio"  value="Female" required/>
+                        Other<input name="User[gender]" type="radio" value="Other" required/>
+                    </fieldset>
+                    <div class="btn">
+                      <button type="submit" id="form-submit" class="bt"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="header">
+            <div class="logo">
+                <p><span id="smrt">Smart</span> Lock</p>
+            </div>
+            <div class="nav-menu">
+                <a href="#logs-container">Access Logs</a>
+                <a href="#">My keys</a>
+                <a href="#">Captured</a>
+            </div>
+            <div class="log-in-menu">
+                <button id="fngr" class="bt">Add Fingerprint</button>
+                <button id="card" class="bt">Add Card</button>
+            </div>
+        </div>
+        <div class="hero-section">
+            <div id="slogan">
+            <h1>Unlock Your<br>
+               <span id="slogan-b">Doors with<br></span>
+                <span id="slogan-l">Smart <span id="lock">Lock</span></span>
+            </h1>
+            </div>
+            <div class="un-lock-buttons">
+                <div class="icon">
+                <div class="img">
+                    <span id="ic-sp" class="red-i"><i class="fa-solid fa-lock" id="lock-icon"></i></span>
+                </div>
+                </div>
+                <div class="lock-buttons">
+                    <div class="outer-btn">
+                    <div class="lock div">
+                        <button id="lock-btn" class="btns">Lock</button>
+                    </div>
+                    </div>
+                    <div class="outer-btn">
+                    <div class="unlock div">
+                        <button id="unlock-btn" class="btns">Unlock</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="feature-div">
+          <div class="feature-img-container curved-border">
+            <div id="black-div"></div>
+            <div class="color-div  curved-border"></div>
+            <img class="curved-border" src="https://remotelock.com/wp-content/uploads/2022/04/multifamily-guest-1263350271-1536x1025.jpg">
+          </div>
+          <div class="features">
+            <div class="description">
+                <img src="https://remotelock.com/wp-content/uploads/2022/02/keypad.svg">
+                <p class="one">Choose Your<br>Credential</p>
+                <p class="two">Fingerprints, mobile and<br>more</p>
+            </div>
+            <div class="description">
+                <img src="https://remotelock.com/wp-content/uploads/2022/02/radio-tower.svg">
+                <p class="one">Control Access<br>Remotely</p>
+                <p class="two">No more lockouts,no<br>more keys,no more<br>rekeying costs</p>
+            </div>
+            <div class="description">
+                <img src="https://remotelock.com/wp-content/uploads/2022/02/manage-doors.svg">
+                <p class="one">Track Door<br>Access</p>
+                <p class="two">Record the fingerprints and card<br>unlock entries</p>
+            </div>
+          </div>
+        </div>
+        <h2 id="h2-access">Access Logs</h2>
+        <div id="logs-container">
+            <div class="header-part">
+                <span>ID</span>
+                <span>Name</span>
+                <span>Method</span>
+                <span>Check-in</span>
+                <span>Status</span>
+            </div>
+            <% for(let log of allLogs){ %>
+            <div class="data-part">
+                <span class="data"><%= log.id%></span>
+                <% if(log.id!=0){%>
+                <% for(let key of allKeys){%>
+                    <% if(key.id===log.id){%>
+                 <span class="data"><%=key.name%></span>
+                 <span class="data"><%=key.method%></span>
+                 <%}%>
+                 <%}%>
+                 <%} else {%>
+                <span class="data">Unknown</span>
+                <span class="data">Unknown</span>
+                <% }%>
+                <span class="data"><%=log.login_at.toString().split(" ")[4]%></span>
+                <span class="data"><%=log.status%></span>
+            </div>
+            <%}%>
+            <!-- <div class="data-part">
+                <span class="data">2</span>
+                <span class="data">Pandey</span>
+                <span class="data">23:59</span>
+                <span class="data">Male</span>
+            </div>
+            <div class="data-part">
+                <span class="data">3</span>
+                <span class="data">Ayush</span>
+                <span class="data">15:37</span>
+                <span class="data">Male</span>
+            </div>
+            <div class="data-part">
+                <span class="data">4</span>
+                <span class="data">Akshay</span>
+                <span class="data">12:20</span>
+                <span class="data">Male</span>
+            </div> -->
+        </div>
+        <h2 id="h2-access">My Keys</h2>
+        <div class="my-keys-container" id="logs-container">
+            <div class="my-keys header-part">
+                <span>Method</span>
+                <span>ID</span>
+                <span>Name</span>
+                <span>Gender</span>
+            </div>
+            <% for(let key of allKeys){%>
+            <div class="record data-part">
+                <% if(key.method=="Fingerprint"){%>
+                   <i class="fa-solid fa-fingerprint" id="icon"></i>
+                <%} else{%>
+                    <i class="fa-solid fa-address-card" id="icon"></i>  
+                <%}%>
+                <span class="data"><%=key.id%></span>
+                <span class="data"><%=key.name%></span>
+                <span class="data"><%=key.gender%></span>
+            </div>
+            <%}%>
+            <!-- <div class="record data-part">
+                <i class="fa-solid fa-fingerprint" id="icon"></i>
+                <span class="data">2</span>
+                <span class="data">Pandey</span>
+                <span class="data"> Male</span>
+            </div> -->
+        </div>
+        <h2 id="h2-access">Monitor Screen</h2>
+        <div class="remotely-msg-container">
+            <div class="remotely-msg-inner-container">
+                <div class="captured-img-container">
+                  <img id="captured-img" src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1711984732~exp=1711985332~hmac=a4beed0f94a255d2d99f7f69ce3f55648c795ae7404ce8ac21ec997e1452868a">
+                </div>
+                <div class="msg-box-container">
+                  <h3 id="remote-msg-heading">Convey Your Message</h3>
+                  <textarea id="msg-area" name="message" rows="3" cols="42" spellcheck="false"></textarea>
+                  <button id="send-message">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+ <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+<script src="/js/smart.js"></script>
+</body>
+</html>
