@@ -9,3 +9,8 @@ This project is an IoT-based Smart Door Lock System that allows users to remotel
 - Remote Messaging – Send messages from the website to the door lock.
 - Web Interface – Built using EJS templating for dynamic rendering.
 - Database Storage – Logs and data are stored using MongoDB.
+
+# Tech Stack
+ - Frontend: EJS, HTML, CSS
+ - Backend: Node.js, Express.js
+ - Database: MongoDB
